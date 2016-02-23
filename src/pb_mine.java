@@ -17,11 +17,8 @@ public class pb_mine {
     private static int pos=0;
 
     public static void main(String[] args) {
-        getMap();
         getText();
         dlMap();
-        printMap();
-        dlmove("w");
         run();
 
 
@@ -136,10 +133,10 @@ public class pb_mine {
             if(inp.equalsIgnoreCase("map")){
                 printMap();
             }else {
-                move(inp);
+                dlmove(inp);
             }
-            if(pos==5||pos==9||pos==12)
-                pos=600;
+            /*if(pos==5||pos==9||pos==12)
+                pos=600;*/
         }
     }
     private static void dlMap(){
@@ -153,7 +150,6 @@ public class pb_mine {
                 for(char a: inp.toCharArray()){
                     if(a=='@'){
                         map_points[0]=j+"_"+i;
-                        k++;
                     }
                     if(a=='p'){
                         map_points[k]=j+"_"+i;
@@ -174,6 +170,10 @@ public class pb_mine {
     private static void dlmove(String in){
         if(in.equalsIgnoreCase("w")){
             int mpos[]= new int[2];
+            int or = mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
+            mpos[0]= Integer.parseInt(map_points[pos].split("_")[0]);
+            mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
+            map[mpos[0]][mpos[1]]='*';
             boolean done = false;
             int h=(mpos[0]=Integer.parseInt(map_points[pos].split("_")[0]))-1;
             mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
@@ -183,9 +183,47 @@ public class pb_mine {
                     if(done){
                         break;
                     }
-                    for(int k=0;k<map_points.length;k++){
+                    for(int k=0;(k<map_points.length)&&(map_points[k]!=null);k++){
                         mpos[0]= Integer.parseInt(map_points[k].split("_")[0]);
-                        if(h==mpos[0]){
+                        mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
+                        if(h==mpos[0]&&(or==mpos[1])){
+                            mpos[0]= Integer.parseInt(map_points[k].split("_")[0]);
+                            mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
+                            map[mpos[0]][mpos[1]]='@';
+                            pos= k;
+                            printMap();
+                            done=true;
+                            break;
+                        }
+                    }
+                }
+
+            }
+        }if(in.equalsIgnoreCase("s")){
+            int mpos[]= new int[2];
+            int or =mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
+            mpos[0]= Integer.parseInt(map_points[pos].split("_")[0]);
+            mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
+            map[mpos[0]][mpos[1]]='*';
+            boolean done = false;
+            int h=(mpos[0]=Integer.parseInt(map_points[pos].split("_")[0]))+1;
+            mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
+            System.out.println(map[mpos[0]-1][mpos[1]]=='*');
+            if(map[mpos[0]+1][mpos[1]]=='*'){
+                for(; h<23 ;h++){
+                    if(done){
+                        break;
+                    }
+                    for(int k=0;(k<map_points.length)&&(map_points[k]!=null);k++){
+                        mpos[0]= Integer.parseInt(map_points[k].split("_")[0]);
+                        mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
+                        if(h==mpos[0]&&(or==mpos[1])){
+                            mpos[0]= Integer.parseInt(map_points[k].split("_")[0]);
+                            mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
+                            map[mpos[0]][mpos[1]]='@';
+                            pos= k;
+                            printMap();
+                            done=true;
                             break;
                         }
                     }
@@ -193,20 +231,64 @@ public class pb_mine {
 
             }
         }
-        if(in.equalsIgnoreCase("w")){
+        if(in.equalsIgnoreCase("a")){
             int mpos[]= new int[2];
+            int or =mpos[0]= Integer.parseInt(map_points[pos].split("_")[0]);
+            mpos[0]= Integer.parseInt(map_points[pos].split("_")[0]);
+            mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
+            map[mpos[0]][mpos[1]]='*';
             boolean done = false;
-            int h=(mpos[0]=Integer.parseInt(map_points[pos].split("_")[0]))-1;
+            int h=(mpos[1]=Integer.parseInt(map_points[pos].split("_")[1]))-1;
             mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
             System.out.println(map[mpos[0]-1][mpos[1]]=='*');
-            if(map[mpos[0]-1][mpos[1]]=='*'){
-                for(; h<23 ;h--){
+            if(map[mpos[0]][mpos[1]-1]=='*'){
+                for(; h<88 ;h--){
                     if(done){
                         break;
                     }
-                    for(int k=0;k<map_points.length;k++){
+                    for(int k=0;(k<map_points.length)&&(map_points[k]!=null);k++){
+                        mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
                         mpos[0]= Integer.parseInt(map_points[k].split("_")[0]);
-                        if(h==mpos[0]){
+                        if(h==mpos[1]&&(or==mpos[0])){
+                            mpos[0]= Integer.parseInt(map_points[k].split("_")[0]);
+                            mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
+                            map[mpos[0]][mpos[1]]='@';
+                            pos= k;
+                            printMap();
+                            done=true;
+                            break;
+                        }
+                    }
+                }
+
+            }
+        }
+        if(in.equalsIgnoreCase("d")){
+            int mpos[]= new int[2];
+            int or =mpos[0]= Integer.parseInt(map_points[pos].split("_")[0]);
+            mpos[0]= Integer.parseInt(map_points[pos].split("_")[0]);
+            mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
+            map[mpos[0]][mpos[1]]='*';
+
+            boolean done = false;
+            int h=(mpos[1]=Integer.parseInt(map_points[pos].split("_")[1]))+1;
+            mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
+            System.out.println(map[mpos[0]-1][mpos[1]]=='*');
+            if(map[mpos[0]][mpos[1]+1]=='*'){
+                for(; h<88 ;h++){
+                    if(done){
+                        break;
+                    }
+                    for(int k=0;(k<map_points.length)&&(map_points[k]!=null);k++){
+                        mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
+                        mpos[0]= Integer.parseInt(map_points[k].split("_")[0]);
+                        if(h==mpos[1]&&(or==mpos[0])){
+                            mpos[0]= Integer.parseInt(map_points[k].split("_")[0]);
+                            mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
+                            map[mpos[0]][mpos[1]]='@';
+                            pos= k;
+                            printMap();
+                            done=true;
                             break;
                         }
                     }
