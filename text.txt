@@ -1,0 +1,6 @@
+<0_ref>
+this is a test
+of the text adder
+<1_ref>
+i hope thes works
+teehee
