@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class pb_mine {
     private static char[][] map= new char[22][88];
-    private static String[]text= new String[100];
+    private static String[] text= new String[100];
     private static String[] map_points = new String[200];
     private static String[] move_jumps ={"1_0","1_11","8_11","8_4","19_4","19_0","8_29","19_29","19_45","0_45","19_61","8_61","8_88",};
     private static int pos=0;
@@ -177,7 +177,7 @@ public class pb_mine {
             boolean done = false;
             int h=(mpos[0]=Integer.parseInt(map_points[pos].split("_")[0]))-1;
             mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
-            System.out.println(map[mpos[0]-1][mpos[1]]=='*');
+           // System.out.println(map[mpos[0]-1][mpos[1]]=='*');
             if(map[mpos[0]-1][mpos[1]]=='*'){
                 for(; h<23 ;h--){
                     if(done){
@@ -191,7 +191,7 @@ public class pb_mine {
                             mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
                             map[mpos[0]][mpos[1]]='@';
                             pos= k;
-                            printMap();
+                           // printMap();
                             done=true;
                             break;
                         }
@@ -208,7 +208,7 @@ public class pb_mine {
             boolean done = false;
             int h=(mpos[0]=Integer.parseInt(map_points[pos].split("_")[0]))+1;
             mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
-            System.out.println(map[mpos[0]-1][mpos[1]]=='*');
+            //System.out.println(map[mpos[0]-1][mpos[1]]=='*');
             if(map[mpos[0]+1][mpos[1]]=='*'){
                 for(; h<23 ;h++){
                     if(done){
@@ -222,7 +222,7 @@ public class pb_mine {
                             mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
                             map[mpos[0]][mpos[1]]='@';
                             pos= k;
-                            printMap();
+                            //printMap();
                             done=true;
                             break;
                         }
@@ -240,7 +240,7 @@ public class pb_mine {
             boolean done = false;
             int h=(mpos[1]=Integer.parseInt(map_points[pos].split("_")[1]))-1;
             mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
-            System.out.println(map[mpos[0]-1][mpos[1]]=='*');
+           // System.out.println(map[mpos[0]-1][mpos[1]]=='*');
             if(map[mpos[0]][mpos[1]-1]=='*'){
                 for(; h<88 ;h--){
                     if(done){
@@ -254,7 +254,7 @@ public class pb_mine {
                             mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
                             map[mpos[0]][mpos[1]]='@';
                             pos= k;
-                            printMap();
+                            //printMap();
                             done=true;
                             break;
                         }
@@ -273,7 +273,7 @@ public class pb_mine {
             boolean done = false;
             int h=(mpos[1]=Integer.parseInt(map_points[pos].split("_")[1]))+1;
             mpos[1]= Integer.parseInt(map_points[pos].split("_")[1]);
-            System.out.println(map[mpos[0]-1][mpos[1]]=='*');
+           // System.out.println(map[mpos[0]-1][mpos[1]]=='*');
             if(map[mpos[0]][mpos[1]+1]=='*'){
                 for(; h<88 ;h++){
                     if(done){
@@ -287,7 +287,7 @@ public class pb_mine {
                             mpos[1]= Integer.parseInt(map_points[k].split("_")[1]);
                             map[mpos[0]][mpos[1]]='@';
                             pos= k;
-                            printMap();
+                            //printMap();
                             done=true;
                             break;
                         }
